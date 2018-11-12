@@ -27,12 +27,6 @@ public class Servidor : MonoBehaviour
         if (con_socket[0] == null)
         {
             con_socket[0] = sock.EndAccept(result);
-            con_socket[0].BeginReceive(
-                    dataRcvBuf[0], 0,
-                    dataRcvBuf[0].Length,
-                    SocketFlags.None,
-                    new AsyncCallback(OnBytesReceived0),
-                    con_socket[0]);
         }
         else
         {
@@ -43,8 +37,13 @@ public class Servidor : MonoBehaviour
                     SocketFlags.None,
                     new AsyncCallback(OnBytesReceived1),
                     this);
+            con_socket[0].BeginReceive(
+                    dataRcvBuf[0], 0,
+                    dataRcvBuf[0].Length,
+                    SocketFlags.None,
+                    new AsyncCallback(OnBytesReceived0),
+                    con_socket[0]);
         }
-        Debug.Log("sas");
         sock.BeginAccept(OnConnectRequest, sock);
     }
     protected void OnBytesReceived1(IAsyncResult result)
