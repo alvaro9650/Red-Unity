@@ -44,6 +44,7 @@ public class Servidor : MonoBehaviour
                     new AsyncCallback(OnBytesReceived1),
                     this);
         }
+        Debug.Log("sas");
         sock.BeginAccept(OnConnectRequest, sock);
     }
     protected void OnBytesReceived1(IAsyncResult result)
